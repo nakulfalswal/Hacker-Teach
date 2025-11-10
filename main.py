@@ -22,8 +22,7 @@ conversation_history = {}
 
 # === HUGGING FACE SETUP ===
 client_hf = InferenceClient(
-    token=HF_TOKEN,
-    model="DeepHat/DeepHat-V1-7B"
+    api_key=HF_TOKEN
 )
 
 # === DISCORD SETUP ===
@@ -55,6 +54,7 @@ def ask_deephat(prompt, channel_id):
         
         # Get response from DeepHat
         completion = client_hf.chat.completions.create(
+            model="DeepHat/DeepHat-V1-7B:featherless-ai",
             messages=conversation_history[channel_id],
             max_tokens=1000,
             temperature=0.7
